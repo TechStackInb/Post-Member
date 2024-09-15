@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Chart</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      #container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+      }
+      input[type='text'] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h2>Update Chart Values</h2>
+      <form id="updateForm">
+        <input type="text" id="name" placeholder="Name" />
+        <input type="text" id="email" placeholder="Email" />
+        <button type="submit">Post</button>
+      </form>
+    </div>
+    <script>
+      document.getElementById('updateForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const body = { name: document.getElementById('name').value, email: document.getElementById('email').value };
+
+        fetch('http://localhost:5000/api/member', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert('Chart updated successfully');
+            console.log(data);
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+          })
+          .catch((error) => {
+            alert('Error updating chart');
+            console.error('Error:', error);
+          });
+      });
+    </script>
+  </body>
+</html>
