@@ -17,9 +17,5 @@ const memberSchema = new mongoose.Schema(
   }
 );
 
-<<<<<<< HEAD
 const Member = mongoose.model('Member', memberSchema);
 module.exports = Member;
-=======
-module.exports = mongoose.model('Member', memberSchema);
->>>>>>> c62f0791693352ac59bf9146ceb028ddacc5a67b
